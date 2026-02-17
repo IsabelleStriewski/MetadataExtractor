@@ -35,10 +35,7 @@ def finde_datei (suchbegriff):
     
     print(f"\nSuche auf folgenden Laufwerken: {laufwerke} ... das kann einen Moment dauern.")
 
-    # 2. Jedes Laufwerk einzeln durchgehen
-    for lw in laufwerke:
-        # 'onerror=None' sorgt dafür, dass das Programm bei gesperrten 
-        # Systemordnern (wie 'System Volume Information') nicht einfach abstürzt.
+    for lw in laufwerke:                                        # jedes Laufwerk einzeln durchgehen
         for root, dirs, files in os.walk(lw):
             for name in files:
                 dateiname_rein, endung = os.path.splitext(name)
@@ -46,7 +43,6 @@ def finde_datei (suchbegriff):
                 if dateiname_rein.lower() == suchbegriff.lower() or name.lower() == suchbegriff.lower():
                     voller_pfad = os.path.join(root, name)
                     treffer.append(voller_pfad)
-                    # Kleines Feedback für den User, damit man sieht, dass er arbeitet
                     print(f"  -> Gefunden: {voller_pfad}")          
     return treffer
     
@@ -86,7 +82,7 @@ def main():
                     wahl_index = int (auswahl)
                     if 1 <= wahl_index <= len(ergebnisse):
                         ziel_datei = ergebnisse[wahl_index - 1]
-                #        print(f"\nDiese Datei wird überprüft: {ziel_datei}")
+                        print(f"\nDiese Datei wird überprüft: {ziel_datei}")
                     else:
                         print(f"\nUngültige Nummer. Bitte wähle, Sie eine Nummer zwischen 1 und {len(ergebnisse)}.")
                 
